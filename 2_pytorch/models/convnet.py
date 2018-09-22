@@ -24,10 +24,10 @@ class CNN(nn.Module):
         #self.max_pool1 = nn.MaxPool2d(3, 1)
         #final_image_dim=self.compute_image_size(final_image_dim,(3,3),0,1)
         self.batch_norm1 = nn.BatchNorm2d(hidden_dim*3)
-        self.conv2 = nn.Conv2d(hidden_dim*3, hidden_dim*2, kernel_size, 1, 1)
-        final_image_dim = self.compute_image_size(final_image_dim, (kernel_size, kernel_size), 1, 1)
-        #self.max_pool2 = nn.MaxPool2d(3, 1)
-        #final_image_dim = self.compute_image_size(final_image_dim, (3, 3), 0, 1)
+        self.conv2 = nn.Conv2d(hidden_dim*3, hidden_dim*2, (5,5), 1, 1)
+        final_image_dim = self.compute_image_size(final_image_dim, (5, 5), 1, 1)
+        self.max_pool2 = nn.MaxPool2d(3, 1)
+        final_image_dim = self.compute_image_size(final_image_dim, (3, 3), 0, 1)
         self.batch_norm2 = nn.BatchNorm2d(hidden_dim*2)
         self.conv3=nn.Conv2d(hidden_dim*2,hidden_dim,kernel_size,1,1)
         final_image_dim = self.compute_image_size(final_image_dim, (kernel_size, kernel_size), 1, 1)
@@ -36,6 +36,7 @@ class CNN(nn.Module):
         self.batch_norm3=nn.BatchNorm2d(hidden_dim)
         self.linear=nn.Linear(hidden_dim*final_image_dim[0]*final_image_dim[1],hidden_dim)
         self.linear1 = nn.Linear(hidden_dim, n_classes)
+        torch.nn.init.xavier_uniform_(self.linear1.weight)
         torch.nn.init.xavier_uniform_(self.linear.weight)
         torch.nn.init.xavier_uniform_(self.conv1.weight)
         torch.nn.init.xavier_uniform_(self.conv2.weight)
@@ -69,9 +70,9 @@ class CNN(nn.Module):
         #############################################################################
         # TODO: Implement the forward pass. This should take few lines of code.
         #############################################################################
-        out1=F.relu(self.batch_norm1(self.conv1(images)))
-        out2=F.relu(self.batch_norm2((self.conv2(out1))))
-        out3=F.relu(self.batch_norm3(self.max_pool3(self.conv3(out2))))
+        out1=self.batch_norm1(F.relu(self.conv1(images)))
+        out2=self.batch_norm2(F.relu((self.conv2(out1))))
+        out3=self.batch_norm3(F.relu(self.max_pool3(self.conv3(out2))))
         scores=self.linear(out3.view(out3.shape[0],-1))
         scores=F.softmax(self.linear1(scores),1)
 
