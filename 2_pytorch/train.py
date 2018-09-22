@@ -94,7 +94,7 @@ elif args.model == 'twolayernn':
 elif args.model == 'convnet':
     model = models.convnet.CNN(im_size, args.hidden_dim, args.kernel_size,
                                n_classes)
-    #model=torch.load("F:\\3sem\\DL\\assignment\\2_pytorch\convnet_66.pt")
+    model=torch.load("DL1\\1_cs231n\\cs231n\\2_pytorch\convnetmax_pool.pt")
 elif args.model == 'mymodel':
     model = models.mymodel.MyModel(im_size, args.hidden_dim,
                                args.kernel_size, n_classes)
