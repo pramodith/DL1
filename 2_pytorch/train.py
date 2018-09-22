@@ -72,11 +72,11 @@ transform = transforms.Compose([
                  transforms.Normalize(cifar10_mean_color, cifar10_std_color),
             ])
 # Datasets
-train_dataset = CIFAR10(args.cifar10_dir, split='train', download=True,
+train_dataset = CIFAR10(args.cifar10_dir, split='train', download=False,
                         transform=transform)
-val_dataset = CIFAR10(args.cifar10_dir, split='val', download=True,
+val_dataset = CIFAR10(args.cifar10_dir, split='val', download=False,
                         transform=transform)
-test_dataset = CIFAR10(args.cifar10_dir, split='test', download=True,
+test_dataset = CIFAR10(args.cifar10_dir, split='test', download=False,
                         transform=transform)
 # DataLoaders
 train_loader = torch.utils.data.DataLoader(train_dataset,
@@ -94,7 +94,7 @@ elif args.model == 'twolayernn':
 elif args.model == 'convnet':
     model = models.convnet.CNN(im_size, args.hidden_dim, args.kernel_size,
                                n_classes)
-    model=torch.load("DL1\\2_pytorch\convnetmax_pool.pt")
+    #model=torch.load("DL1\\2_pytorch\convnetmax_pool.pt")
 elif args.model == 'mymodel':
     model = models.mymodel.MyModel(im_size, args.hidden_dim,
                                args.kernel_size, n_classes)
