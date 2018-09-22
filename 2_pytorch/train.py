@@ -194,7 +194,7 @@ if __name__=='__main__':
     evaluate('test', verbose=True)
 
     # Save the model (architecture and weights)
-    torch.save(model, args.model + 'max_pool.pt')
+    torch.save(model, args.model + 'vgg.pt')
     # Later you can call torch.load(file) to re-load the trained model into python
     # See http://pytorch.org/docs/master/notes/serialization.html for more details
 
