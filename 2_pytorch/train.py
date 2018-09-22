@@ -105,7 +105,7 @@ criterion = F.cross_entropy
 if args.cuda:
     model.cuda()
 
-optimizer=optim.SGD(model.parameters(),lr=args.lr,momentum=0.9,weight_decay=args.weight_decay)
+optimizer=optim.RMSprop(model.parameters(),lr=args.lr,weight_decay=args.weight_decay,momentum=args.momentum)
 #############################################################################
 # TODO: Initialize an optimizer from the torch.optim package using the
 # appropriate hyperparameters found in args. This only requires one line.

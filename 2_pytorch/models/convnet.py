@@ -34,7 +34,8 @@ class CNN(nn.Module):
         self.max_pool3 = nn.MaxPool2d(3, 1)
         final_image_dim = self.compute_image_size(final_image_dim, (3, 3), 0, 1)
         self.batch_norm3=nn.BatchNorm2d(hidden_dim)
-        self.linear=nn.Linear(hidden_dim*final_image_dim[0]*final_image_dim[1],n_classes)
+        self.linear=nn.Linear(hidden_dim*final_image_dim[0]*final_image_dim[1],hidden_dim)
+        self.linear1 = nn.Linear(hidden_dim, n_classes)
         torch.nn.init.xavier_uniform_(self.linear.weight)
         torch.nn.init.xavier_uniform_(self.conv1.weight)
         torch.nn.init.xavier_uniform_(self.conv2.weight)
@@ -71,8 +72,8 @@ class CNN(nn.Module):
         out1=F.relu(self.batch_norm1(self.conv1(images)))
         out2=F.relu(self.batch_norm2((self.conv2(out1))))
         out3=F.relu(self.batch_norm3(self.max_pool3(self.conv3(out2))))
-        #scores=self.linear(out3.view(out3.shape[0],-1))
-        scores=F.softmax(self.linear(out3.view(out3.shape[0],-1)),1)
+        scores=self.linear(out3.view(out3.shape[0],-1))
+        scores=F.softmax(self.linear1(scores),1)
 
 
         #############################################################################
