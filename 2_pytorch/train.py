@@ -94,7 +94,7 @@ elif args.model == 'twolayernn':
 elif args.model == 'convnet':
     model = models.convnet.CNN(im_size, args.hidden_dim, args.kernel_size,
                                n_classes)
-    model=torch.load("convnetvgg_16.pt")
+    #model=torch.load("convnetvgg_16.pt")
 elif args.model == 'mymodel':
     model = models.mymodel.MyModel(im_size, args.hidden_dim,
                                args.kernel_size, n_classes)
@@ -105,8 +105,8 @@ criterion = F.cross_entropy
 if args.cuda:
     model.cuda()
 
-optimizer=optim.SGD(model.parameters(),lr=args.lr,weight_decay=args.weight_decay,momentum=args.momentum)
-#optimizer=optim.RMSprop(model.parameters(),lr=args.lr,weight_decay=args.weight_decay,momentum=args.momentum)
+#optimizer=optim.SGD(model.parameters(),lr=args.lr,weight_decay=args.weight_decay,momentum=args.momentum)
+optimizer=optim.RMSprop(model.parameters(),lr=args.lr,weight_decay=args.weight_decay,momentum=args.momentum)
 scheduler=optim.lr_scheduler.MultiStepLR(optimizer,[12,15],0.1)
 #############################################################################
 # TODO: Initialize an optimizer from the torch.optim package using the
