@@ -123,7 +123,6 @@ def train(epoch):
     # Some models use slightly different forward passes and train and test
     # time (e.g., any model with Dropout). This puts the model in train mode
     # (as opposed to eval mode) so it knows which one to use.
-    scheduler.step()
     model.train()
     # train loop
     for batch_idx, batch in enumerate(train_loader):
@@ -193,6 +192,7 @@ if __name__=='__main__':
     # train the model one epoch at a time
     for epoch in range(1, args.epochs + 1):
         train(epoch)
+        scheduler.step()
         if epoch%2==0:
             torch.save(model, args.model + 'vgg_'+str(epoch)+'.pt')
 
