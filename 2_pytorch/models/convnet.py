@@ -70,7 +70,7 @@ class CNN(nn.Module):
         #############################################################################
         # TODO: Implement the forward pass. This should take few lines of code.
         #############################################################################
-        out1=F.relu(self.batch_norm1(self.conv1(images)))
+        out1=self.batch_norm1(F.relu(self.conv1(images)))
         out2=self.batch_norm2(self.max_pool2(F.relu(self.conv2(out1))))
         out3=self.batch_norm3(self.max_pool3(F.relu(self.conv3(out2))))
         scores=F.relu(self.linear(out3.view(out3.shape[0],-1)))
