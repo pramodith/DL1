@@ -123,6 +123,7 @@ def train(epoch):
     # Some models use slightly different forward passes and train and test
     # time (e.g., any model with Dropout). This puts the model in train mode
     # (as opposed to eval mode) so it knows which one to use.
+    scheduler.step()
     model.train()
     # train loop
     for batch_idx, batch in enumerate(train_loader):
@@ -134,7 +135,6 @@ def train(epoch):
         # TODO: Update the parameters in model using the optimizer from above.
         # This only requires a couple lines of code.
         #############################################################################
-        scheduler.step()
         optimizer.zero_grad()
         pred=model(images)
         loss = criterion(pred,targets)
