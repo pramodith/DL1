@@ -106,6 +106,7 @@ if args.cuda:
     model.cuda()
 
 optimizer=optim.RMSprop(model.parameters(),lr=args.lr,weight_decay=args.weight_decay,momentum=args.momentum)
+scheduler=optim.lr_scheduler.MultiStepLR(optimizer,[12,15],0.1)
 #############################################################################
 # TODO: Initialize an optimizer from the torch.optim package using the
 # appropriate hyperparameters found in args. This only requires one line.
@@ -133,6 +134,7 @@ def train(epoch):
         # TODO: Update the parameters in model using the optimizer from above.
         # This only requires a couple lines of code.
         #############################################################################
+        scheduler.step()
         optimizer.zero_grad()
         pred=model(images)
         loss = criterion(pred,targets)
