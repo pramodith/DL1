@@ -72,11 +72,11 @@ transform = transforms.Compose([
                  transforms.Normalize(cifar10_mean_color, cifar10_std_color),
             ])
 # Datasets
-train_dataset = CIFAR10(args.cifar10_dir, split='train', download=False,
+train_dataset = CIFAR10(args.cifar10_dir, split='train', download=True,
                         transform=transform)
-val_dataset = CIFAR10(args.cifar10_dir, split='val', download=False,
+val_dataset = CIFAR10(args.cifar10_dir, split='val', download=True,
                         transform=transform)
-test_dataset = CIFAR10(args.cifar10_dir, split='test', download=False,
+test_dataset = CIFAR10(args.cifar10_dir, split='test', download=True,
                         transform=transform)
 # DataLoaders
 train_loader = torch.utils.data.DataLoader(train_dataset,
