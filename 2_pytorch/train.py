@@ -65,7 +65,7 @@ im_size = (3, 32, 32)
 # subtracting the same color for all pixels doesn't make much difference.
 # mean color of training images
 cifar10_mean_color = [0.49131522, 0.48209435, 0.44646862]
-# std dev of color across training images
+# std dev of color across training imagess
 cifar10_std_color = [0.01897398, 0.03039277, 0.03872553]
 transform = transforms.Compose([
                  transforms.ToTensor(),
