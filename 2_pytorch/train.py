@@ -191,6 +191,9 @@ if __name__=='__main__':
     # train the model one epoch at a time
     for epoch in range(1, args.epochs + 1):
         train(epoch)
+        if epoch%5==0:
+            torch.save(model, args.model + 'vgg_'+str(epoch)+'.pt')
+
     evaluate('test', verbose=True)
 
     # Save the model (architecture and weights)
