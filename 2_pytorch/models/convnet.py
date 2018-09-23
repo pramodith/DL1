@@ -33,7 +33,7 @@ class CNN(nn.Module):
         final_image_dim = self.compute_image_size(final_image_dim, (kernel_size, kernel_size), 1, 1)
         self.max_pool3 = nn.MaxPool2d(3, 1)
         final_image_dim = self.compute_image_size(final_image_dim, (3, 3), 0, 1)
-        self.conv4 = nn.Conv2d(hidden_dim * 2, hidden_dim, (5,5), 1, 1)
+        self.conv4 = nn.Conv2d(hidden_dim, hidden_dim, (5,5), 1, 1)
         final_image_dim = self.compute_image_size(final_image_dim, (5, 5), 1, 1)
         self.max_pool4 = nn.MaxPool2d(3, 1)
         final_image_dim = self.compute_image_size(final_image_dim, (3, 3), 0, 1)
